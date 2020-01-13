@@ -1,7 +1,7 @@
 const path = require('path')
 const fs = require('fs')
 const ffmpeg = require('fluent-ffmpeg')
-const youtubeDl = require('youtube-dl')
+const youtubeDl = require('@microlink/youtube-dl')
 
 function exists (filename, cb) {
   fs.access(filename, fs.F_OK, (err) => {
@@ -32,7 +32,7 @@ function download (url, options = {
 
     // Will be called when the download starts.
     video.on('info', info => {
-      let filename = info.filename
+      let filename = info._filename
       filename = filename
         .replace('.mp4', '')
         .substring(0, filename.length - 16)
